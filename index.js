@@ -3,6 +3,8 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const generateMarkdown = require("./utils/generateMarkdown");
 const { join } = require("path");
+
+//inquirer prompts
 const questions = [
     {
         name: "title",
