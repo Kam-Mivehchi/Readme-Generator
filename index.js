@@ -1,88 +1,81 @@
 // TODO: Include packages needed for this application
 const inquirer = require("inquirer");
 const fs = require("fs");
-
-
-inquirer
-.prompt([
+const generateMarkdown = require("./utils/generateMarkdown");
+const { join } = require("path");
+const questions = [
     {
-        name: "Title",
+        name: "title",
         type: "input",
         message: "Title:"
     },
     {
-        name: "Description",
+        name: "description",
         type: "input",
         message: "Description:"
     },
-    
+
     {
-        name: "Install",
+        name: "install",
         type: "input",
         message: "Installation Instructions:"
     },
     {
-        name: "Usage",
+        name: "usage",
         type: "input",
         message: "How is it used:"
     },
     {
-        name: "License",
+        name: "license",
         type: "list",
-        choices: ['Public', 'Permissive', 'LGPL', 'Copyleft', 'Proprietary', 'MIT'],
+        choices: ['Mozilla Public License 2.0', 'ISC', 'Apache 2.0', 'MIT'],
         message: "License"
     },
     {
-        name: "Contributing",
+        name: "contributing",
         type: "input",
         message: "How to contribute:"
     },
     {
-        name: "Tests",
+        name: "tests",
         type: "input",
         message: "Test Instructions:"
     },
     {
-        name: "Email",
+        name: "email",
         type: "input",
         message: "Enter your email:"
     },
     {
-        name: "Github",
+        name: "github",
         type: "input",
-        message: "Github Link:"
+        message: "Enter your Github username (**USERNAME ONLY** Do not include 'https://www.github.com/':"
+    },
+    {
+        name: "linkedin",
+        type: "input",
+        message: "Enter your Linkedin user name (**USER NAME ONLY** Do not include 'https://www.linkedin.com/in/':"
+    },
+    {
+        name: "portfolio",
+        type: "input",
+        message: "What is your Portfolio URL (Do not include 'https://www.'"
     }
-]) 
-
-.then(({Title, Description, Install, Usage, License, Contributing, Tests, Email, Github})=> {
-    const section1 = `# ${Title}\n\n`;
-    const section2 = `## Description: \n ${Description} \n\n`;
-    const section3 = `## Installation:\n ${Install} \n\n`;
-    const section4 = `## Usage:\n ${Usage} \n\n`;
-    const tableOfContents = `## Table of Contents:
-+ [Installation](#installation)
-+ [Usage](#usage)
-+ [License](#license)
-+ [Contributing](#contributing)
-+ [Tests](#tests)
-+ [Questions](#questions)
-
-`
-    const section5 = `## Tests:\n  ${Tests} \n\n`;
-    const section6 = `## Liscense:\n  ${License} \n\n`;
-    const section7 = `## Contributing: \n ${Contributing} \n\n`;
-    const section8 = `## Questions: \n Please reach out to ${Github} or email ${Email}`;
-    console.log(section1+section2+section3+section4+section5+section6+section7 +section8);
-    const final = section1+section2+tableOfContents+section3+section4+section5+section6+section7+section8;
-    fs.writeFile('./GoodReadMe.md', final, 'utf8', (err) => {
+]
+//generates a markdown file with the input content
+function createFile(content) {
+    fs.writeFile('./Example.md', content, 'utf8', (err) => {
         if (err) throw err;
         console.log('Stored the new read me file')
-        });
-})
+    });
+}
 
-// TODO: Create an array of questions for user input
-// TODO: Create a function to write README file
-
-
-// TODO: Create a function to initialize app
+//initialize application
+function init() {
+    inquirer.prompt(questions)
+        .then(answers => generateMarkdown(answers))
+        .then((content) => createFile(content))
+        .catch(err => console.error(err));
+}
+init()
 
