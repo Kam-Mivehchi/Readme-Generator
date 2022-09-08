@@ -4,7 +4,7 @@
 Node Application that generates a styled README file based on user input. This application utilizes the inquirer npm package to gather user input from the command line and generate a markdown file with the given input
 
 ## Table of Contents
-- [Professional Readme Generator](#professional-readme-generator)
+
   - [Desciption](#desciption)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
@@ -18,9 +18,6 @@ Node Application that generates a styled README file based on user input. This a
 clone the repository, then open project in terminal and run node index.js
     
 ## Usage
-
-Sample Readme can be found [here]("https://github.com/Kam-Mivehchi/Readme-Generator/blob/main/Example.md")
-
 ### Walkthrough Video
 <video src="https://user-images.githubusercontent.com/90432404/142754104-c32ee546-d008-4aaf-a726-b081db717cb4.mp4" controls="controls" style="max-width: 730px;">
 </video>
